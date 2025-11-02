@@ -1,0 +1,47 @@
+---
+import MainLayout from "src/layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+import { buildNavigation, mapHeadings } from "src/utils/navigation";
+import { strings } from "src/utils/lang";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages");
+
+  const paths = pages.map((page) => {
+    const [lang] = page.id.split("/");
+    return { params: { lang }, props: page};
+  });
+
+  return paths;
+}
+
+const { lang } = Astro.params;
+const page = Astro.props;
+const entries = await getCollection("pages");
+const { navGroups, sidebarItems, baseHref } = buildNavigation(entries);
+---
+
+<MainLayout
+  title="Blog cá nhân"
+  description="Blog cá nhân xây dựng với Astro + Angular"
+  navGroups={navGroups}
+  sidebarItems={sidebarItems}
+  currentSlug={`${baseHref}${lang}`}
+  headings={mapHeadings((await page.render()).headings)}
+  baseHref={baseHref}
+  lang={lang as keyof typeof strings}
+>
+  <section>
+    <h1>Chào mừng đến với không gian cá nhân</h1>
+    <p>
+      Đây là trang chủ giới thiệu nhanh về blog tĩnh được dựng bằng Astro và
+      Angular. Sử dụng thanh bên trái để truy cập toàn bộ bài viết hoặc chọn các
+      danh mục trên thanh điều hướng phía trên.
+    </p>
+    <p>
+      Các bài viết được viết bằng Markdown và hệ thống sẽ tự động chuyển hóa
+      thành trang web tĩnh khi build. Bạn có thể dùng script build để xuất bản
+      toàn bộ site hoặc chỉ một trang cụ thể.
+    </p>
+  </section>
+</MainLayout>

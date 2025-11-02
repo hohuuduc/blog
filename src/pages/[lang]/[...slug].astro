@@ -1,0 +1,45 @@
+---
+import MainLayout from "src/layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+import { buildNavigation, mapHeadings } from "src/utils/navigation";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("pages");
+  const onlyPage = import.meta.env.ONLY_PAGE ?? process.env.ONLY_PAGE;
+  return entries
+    .filter((entry) => {
+      if (!onlyPage) return true;
+      return entry.slug === onlyPage;
+    })
+    .map((entry) => {
+      const [lang, ...slug] = entry.slug.split("/");
+      return {
+        params: { lang: lang, slug: slug.join('/') },
+        props: entry ,
+      };
+    });
+}
+
+const entries = await getCollection("pages");
+const { navGroups, sidebarItems, baseHref } = buildNavigation(entries);
+const { lang } = Astro.params;
+const page = Astro.props;
+
+const { Content, headings } = await page.render();
+---
+
+<MainLayout
+  title={`${page.data.title} | Blog cá nhân`}
+  description={page.data.description}
+  sidebarItems={sidebarItems}
+  currentSlug={page.slug}
+  headings={mapHeadings(headings)}
+  baseHref={baseHref}
+  lang={lang}
+>
+  <article>
+    <h1>{page.data.title}</h1>
+    <p>{page.data.date?.toLocaleString(lang)}</p>
+    <Content />
+  </article>
+</MainLayout>
