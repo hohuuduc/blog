@@ -118,10 +118,10 @@ const menuItems: NavItem[] = [
       }
       .layout-container {
         display: grid;
-        grid-template-columns: 260px minmax(0, 1fr) 220px;
+        grid-template-columns: 260px minmax(1050px, 1fr) 220px;
         gap: 2rem;
         margin: 0 auto;
-        max-width: 1200px;
+        max-width: calc(1050px + 260px + 220px + 4rem);
         padding: 2rem;
       }
       .content-area {
