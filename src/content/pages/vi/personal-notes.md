@@ -1,9 +1,7 @@
 ---
 title: "Ghi chú cá nhân"
 description: "Nơi lưu trữ suy nghĩ ngẫu nhiên và kế hoạch tương lai."
-navGroup: "other"
 order: 4
-tags: ["notes"]
 sidebarGroup: "Khám phá"
 ---
 

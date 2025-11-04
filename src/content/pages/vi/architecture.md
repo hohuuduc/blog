@@ -1,9 +1,7 @@
 ---
 title: "Kiến trúc dự án"
 description: "Chi tiết kiến trúc của blog Astro + Angular."
-navGroup: "information"
 order: 2
-tags: ["architecture", "structure"]
 sidebarGroup: "Bắt đầu"
 ---
 

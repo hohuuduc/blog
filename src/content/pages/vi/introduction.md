@@ -1,9 +1,7 @@
 ---
 title: "Chào mừng đến với blog"
 description: "Giới thiệu tổng quan về blog cá nhân được xây dựng với Astro và Angular."
-navGroup: "docs"
 order: 1
-tags: ["astro", "angular", "blog"]
 sidebarGroup: "Bắt đầu"
 ---
 

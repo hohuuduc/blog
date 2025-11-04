@@ -1,9 +1,7 @@
 ---
 title: "Project Architecture"
 description: "Detailed architecture of the Astro + Angular blog."
-navGroup: "information"
 order: 2
-tags: ["architecture", "structure"]
 sidebarGroup: "Getting Started"
 ---
 

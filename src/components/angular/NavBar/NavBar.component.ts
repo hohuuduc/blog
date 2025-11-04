@@ -1,34 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject, signal } from '@angular/core';
-import type { NavGroup } from '../types';
-import { resolveBaseSegment } from 'src/utils/navigation';
-import { strings } from 'src/utils/lang';
-
-const MENU = [
-  {
-    label: 'nav.docs',
-    href: `${resolveBaseSegment()}/`,
-    pages: []
-  },
-  {
-    label: 'nav.about',
-    href: '/about',
-    pages: []
-  },
-  {
-    label: 'nav.products',
-    pages: [
-      {
-        title: 'Product 1',
-        href: '/products/product-1'
-      },
-      {
-        title: 'Product 2',
-        href: '/products/product-2'
-      }
-    ]
-  }
-] as NavGroup[];
+import { Component, Input, signal } from '@angular/core';
+import type { NavItem } from '../types';
+import BaseComponent from '../Base.component';
 
 @Component({
   selector: 'nav-bar',
@@ -37,13 +10,14 @@ const MENU = [
   templateUrl: './NavBar.component.html',
   styleUrls: ['./NavBar.component.css']
 })
-export class NavBarComponent {
+export class NavBarComponent extends BaseComponent {
   @Input() baseHref = '/';
-  @Input() lang: keyof typeof strings = 'vi';
+  @Input() navItems: NavItem[] = [];
 
   private scrolledState = signal(false);
 
   constructor() {
+    super();
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', () => {
         this.scrolledState.set(window.scrollY > 12);
@@ -52,8 +26,8 @@ export class NavBarComponent {
   }
 
   getNavItems() {
-    return MENU.map(i => ({
-      label: strings[this.lang][i.label],
+    return this.navItems.map(i => ({
+      label: this.getString(i.label),
       href: i.href,
       pages: i.pages
     }));
@@ -64,7 +38,7 @@ export class NavBarComponent {
   }
 
   openSettings(): void {
-    console.log("debug")
+    document.dispatchEvent(new CustomEvent('open-settings-dialog'));
   }
 }
 

@@ -2,14 +2,14 @@
 import MainLayout from "src/layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
 import { buildNavigation, mapHeadings } from "src/utils/navigation";
-import { strings } from "src/utils/lang";
+import { type Languages } from "src/utils/lang";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
 
   const paths = pages.map((page) => {
     const [lang] = page.id.split("/");
-    return { params: { lang }, props: page};
+    return { params: { lang }, props: page };
   });
 
   return paths;
@@ -18,18 +18,17 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const page = Astro.props;
 const entries = await getCollection("pages");
-const { navGroups, sidebarItems, baseHref } = buildNavigation(entries);
+const { sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
 ---
 
 <MainLayout
   title="Blog cá nhân"
   description="Blog cá nhân xây dựng với Astro + Angular"
-  navGroups={navGroups}
   sidebarItems={sidebarItems}
   currentSlug={`${baseHref}${lang}`}
   headings={mapHeadings((await page.render()).headings)}
   baseHref={baseHref}
-  lang={lang as keyof typeof strings}
+  lang={lang as Languages}
 >
   <section>
     <h1>Chào mừng đến với không gian cá nhân</h1>

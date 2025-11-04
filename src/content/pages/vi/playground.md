@@ -1,9 +1,7 @@
 ---
 title: "Playground"
 description: "Khu vực thử nghiệm với các snippet thú vị."
-navGroup: "playground"
 order: 3
-tags: ["demo", "examples"]
 sidebarGroup: "Khám phá"
 ---
 

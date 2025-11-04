@@ -1,19 +1,8 @@
 import type { CollectionEntry } from 'astro:content';
 import type { Heading } from 'astro:content';
+import type { Languages } from './lang';
 
 export interface NavData {
-  navGroups: {
-    id: string;
-    label: string;
-    href: string;
-    pages: {
-      title: string;
-      slug: string;
-      description?: string;
-      navGroup: 'docs' | 'information' | 'playground' | 'other';
-      href: string;
-    }[];
-  }[];
   sidebarItems: {
     title: string;
     slug: string;
@@ -44,7 +33,8 @@ export function resolveBaseSegment() {
   return trimmed.replace(/^\/+|\/+$/g, '');
 }
 
-export function buildNavigation(entries: CollectionEntry<'pages'>[]): NavData {
+export function buildNavigation(entries: CollectionEntry<'pages'>[], lang: Languages): NavData {
+  const filter = entries.filter((entry) => entry.id.split("/")[0] === lang);
   const baseSegment = resolveBaseSegment();
   const basePrefix = baseSegment ? `/${baseSegment}` : '';
   const homeHref = basePrefix || '/';
@@ -57,7 +47,7 @@ export function buildNavigation(entries: CollectionEntry<'pages'>[]): NavData {
     return basePrefix ? `${basePrefix}/${trimmedSlug}` : `/${trimmedSlug}`;
   };
 
-  const sorted = [...entries].sort((a, b) => {
+  const sorted = [...filter].sort((a, b) => {
     const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
     const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
     if (orderA !== orderB) return orderA - orderB;
@@ -73,21 +63,6 @@ export function buildNavigation(entries: CollectionEntry<'pages'>[]): NavData {
     navMap.get(group)!.push(entry);
   }
 
-  const navGroups = Array.from(navMap.entries()).map(([id, items]) => {
-    return {
-      id,
-      label: NAV_LABELS[id] ?? id,
-      href: buildHref(items[0]?.slug ?? ''),
-      pages: items.map((item) => ({
-        title: item.data.title,
-        slug: item.slug,
-        description: item.data.description,
-        navGroup: item.data.navGroup,
-        href: buildHref(item.slug)
-      }))
-    };
-  });
-
   const sidebarItems = sorted.map((entry) => ({
     title: entry.data.title,
     slug: entry.slug,
@@ -95,7 +70,7 @@ export function buildNavigation(entries: CollectionEntry<'pages'>[]): NavData {
     href: buildHref(entry.slug)
   }));
 
-  return { navGroups, sidebarItems, baseHref: homeHref };
+  return { sidebarItems, baseHref: homeHref };
 }
 
 export function mapHeadings(headings: Heading[]): {

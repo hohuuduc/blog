@@ -1,0 +1,47 @@
+:host {
+    display: contents;
+}
+
+.sidebar {
+    position: sticky;
+    top: 4.5rem;
+    padding: 1rem 1rem 2rem;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.sidebar-group+.sidebar-group {
+    margin-top: 1rem;
+}
+
+.sidebar-group-label {
+    font-weight: 600;
+    color: var(--text-subtle);
+    margin-bottom: 0.4rem;
+}
+
+.sidebar-link {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.3rem 0.4rem;
+    border-radius: 0.5rem;
+}
+
+.sidebar-link.active {
+    color: var(--text-strong);
+    background: color-mix(in srgb, var(--accent-color) 18%, transparent);
+    font-weight: 600;
+}
+
+.sidebar-link:hover {
+    color: var(--text-strong);
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        display: none;
+    }
+}

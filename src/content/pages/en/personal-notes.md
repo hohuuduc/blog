@@ -1,9 +1,7 @@
 ---
 title: "Personal Notes"
 description: "A place to capture spontaneous thoughts and future plans."
-navGroup: "other"
 order: 4
-tags: ["notes"]
 sidebarGroup: "Explore"
 ---
 
@@ -15,4 +13,4 @@ sidebarGroup: "Explore"
 
 ### Short Reflections
 
-> Write down your thoughts—it's the fastest way to make them clear.
+> Write down your thoughtsï¿½it's the fastest way to make them clear.

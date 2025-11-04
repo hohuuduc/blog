@@ -1,9 +1,7 @@
 ---
 title: "Playground"
 description: "A sandbox for quick experiments with handy snippets."
-navGroup: "playground"
 order: 3
-tags: ["demo", "examples"]
 sidebarGroup: "Explore"
 ---
 

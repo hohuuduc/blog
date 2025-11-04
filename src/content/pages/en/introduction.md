@@ -1,9 +1,7 @@
 ---
 title: "Welcome to the blog"
 description: "An overview of this personal blog built with Astro and Angular."
-navGroup: "docs"
 order: 1
-tags: ["astro", "angular", "blog"]
 sidebarGroup: "Getting Started"
 ---
 

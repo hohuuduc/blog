@@ -1,14 +1,12 @@
-import type { strings } from "@utils/lang";
+import type { Strings } from "@utils/lang";
 
-export interface NavigationPage {
-  title: string;
-  href: string;
-}
-
-export interface NavGroup {
-  label: keyof (typeof strings)[keyof typeof strings];
-  href: string;
-  pages: NavigationPage[];
+export interface NavItem {
+  label: Strings;
+  href?: string;
+  pages?: {
+    title: string;
+    href: string;
+  }[];
 }
 
 export interface SidebarItem {

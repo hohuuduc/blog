@@ -1,11 +1,13 @@
 ---
-import '../components/angular/zone-bootstrap';
-import { NavBarComponent } from '../components/angular/NavBar/NavBar.component';
-import { SidebarComponent } from '../components/angular/Sidebar.component';
-import { OnThisPageComponent } from '../components/angular/OnThisPage.component';
-import { SettingsDialogComponent } from '../components/angular/SettingsDialog.component';
-import type { HeadingLink } from '../components/angular/types';
-import type { strings } from '@utils/lang';
+import "../components/angular/zone-bootstrap";
+import { NavBarComponent } from "../components/angular/NavBar/NavBar.component";
+import { SidebarComponent } from "../components/angular/Sidebar/Sidebar.component";
+import { OnThisPageComponent } from "../components/angular/OnThisPage.component";
+import { SettingsDialogComponent } from "../components/angular/SerttingsDialog/SettingsDialog.component";
+import type { HeadingLink } from "../components/angular/types";
+import { resolveBaseSegment } from "@utils/navigation";
+import { type NavItem } from "../components/angular/types";
+import type { Languages } from "@utils/lang";
 
 interface Props {
   title: string;
@@ -19,13 +21,48 @@ interface Props {
   currentSlug: string;
   headings: HeadingLink[];
   baseHref: string;
-  lang: keyof typeof strings;
+  lang: Languages;
 }
 
-const { title, description, sidebarItems, currentSlug, headings, baseHref, lang } = Astro.props as Props;
+const {
+  title,
+  description,
+  sidebarItems,
+  currentSlug,
+  headings,
+  baseHref,
+  lang,
+} = Astro.props as Props;
+
+const menuItems: NavItem[] = [
+  {
+    label: "nav.docs",
+    href: `${resolveBaseSegment()}/${lang}/`,
+    pages: []
+  },
+  {
+    label: "nav.about",
+    href: "/about",
+    pages: []
+  },
+  {
+    label: "nav.products",
+    pages: [
+      {
+        title: "Product 1",
+        href: "/products/product-1",
+      },
+      {
+        title: "Product 2",
+        href: "/products/product-2",
+      },
+    ],
+  },
+];
 ---
+
 <!doctype html>
-<html lang="vi" data-theme="light">
+<html lang={lang} data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -49,7 +86,7 @@ const { title, description, sidebarItems, currentSlug, headings, baseHref, lang 
         --accent-color: #2563eb;
         --body-bg: #f8fafc;
       }
-      :root[data-theme='dark'] {
+      :root[data-theme="dark"] {
         color-scheme: dark;
         --surface-color: #0f172a;
         --surface-elevated: #111827;
@@ -64,7 +101,13 @@ const { title, description, sidebarItems, currentSlug, headings, baseHref, lang 
         margin: 0;
         background: var(--body-bg);
         color: var(--text-strong);
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
         min-height: 100vh;
       }
       main {
@@ -108,10 +151,11 @@ const { title, description, sidebarItems, currentSlug, headings, baseHref, lang 
         padding: 1.25rem;
         border-radius: 0.75rem;
         overflow-x: auto;
-        border: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
+        border: 1px solid
+          color-mix(in srgb, var(--border-color) 60%, transparent);
       }
       .content-area :global(code) {
-        font-family: 'Space Grotesk', 'Fira Code', monospace;
+        font-family: "Space Grotesk", "Fira Code", monospace;
       }
       @media (max-width: 1200px) {
         .layout-container {
@@ -125,14 +169,18 @@ const { title, description, sidebarItems, currentSlug, headings, baseHref, lang 
     </style>
   </head>
   <body>
-    <NavBarComponent client:load baseHref={baseHref} lang={'en'} />
+    <NavBarComponent client:load baseHref={baseHref} lang={lang} navItems={menuItems} />
     <div class="layout-container">
-      <SidebarComponent client:load items={sidebarItems} currentSlug={currentSlug} />
+      <SidebarComponent
+        client:load
+        items={sidebarItems}
+        currentSlug={currentSlug}
+      />
       <main class="content-area">
         <slot />
       </main>
       <OnThisPageComponent client:load headings={headings} />
     </div>
-    <SettingsDialogComponent client:load />
+    <SettingsDialogComponent client:load lang={lang} />
   </body>
 </html>

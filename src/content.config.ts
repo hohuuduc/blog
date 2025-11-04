@@ -5,10 +5,8 @@ const pages = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    date: z.date().optional().default(new Date()),
-    navGroup: z.enum(['docs', 'information', 'playground', 'other']).default('docs'),
+    date: z.date().default(new Date()),
     order: z.number().optional(),
-    tags: z.array(z.string()).default([]),
     sidebarGroup: z.string().optional()
   })
 });
