@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, effect, signal, ViewChild, Input } from '@angular/core';
+import { Component, ElementRef, effect, signal, ViewChild } from '@angular/core';
 import type { AfterViewInit } from '@angular/core';
 import { languages, type Languages } from '@utils/lang';
 import BaseComponent from '../Base.component';

@@ -33,7 +33,7 @@ export function resolveBaseSegment() {
   return trimmed.replace(/^\/+|\/+$/g, '');
 }
 
-export function buildNavigation(entries: CollectionEntry<'pages'>[], lang: Languages): NavData {
+export function buildNavigation(entries: CollectionEntry<'blog'>[], lang: Languages): NavData {
   const filter = entries.filter((entry) => entry.id.split("/")[0] === lang);
   const baseSegment = resolveBaseSegment();
   const basePrefix = baseSegment ? `/${baseSegment}` : '';
@@ -53,15 +53,6 @@ export function buildNavigation(entries: CollectionEntry<'pages'>[], lang: Langu
     if (orderA !== orderB) return orderA - orderB;
     return a.data.title.localeCompare(b.data.title, 'vi');
   });
-
-  const navMap = new Map<string, CollectionEntry<'pages'>[]>();
-  for (const entry of sorted) {
-    const group = entry.data.navGroup;
-    if (!navMap.has(group)) {
-      navMap.set(group, []);
-    }
-    navMap.get(group)!.push(entry);
-  }
 
   const sidebarItems = sorted.map((entry) => ({
     title: entry.data.title,

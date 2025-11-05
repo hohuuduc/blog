@@ -12,8 +12,20 @@
     font-size: 0.9rem;
 }
 
+h2 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+    color: var(--text-subtle);
+}
+
 .sidebar-group+.sidebar-group {
     margin-top: 1rem;
+}
+
+.sidebar-group-plain {
+    margin-top: 0;
 }
 
 .sidebar-group-label {
@@ -28,6 +40,7 @@
     text-decoration: none;
     padding: 0.3rem 0.4rem;
     border-radius: 0.5rem;
+    flex: 1;
 }
 
 .sidebar-link.active {
@@ -38,6 +51,63 @@
 
 .sidebar-link:hover {
     color: var(--text-strong);
+}
+
+.tree-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tree-node {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0;
+}
+
+.tree-node-leaf .tree-toggle {
+    visibility: hidden;
+}
+
+.tree-toggle {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 0.4rem;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.tree-toggle:hover {
+    color: var(--text-strong);
+    background: color-mix(in srgb, var(--accent-color) 18%, transparent);
+}
+
+.tree-toggle:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+.tree-toggle-placeholder {
+    cursor: default;
+    visibility: hidden;
+}
+
+.tree-children {
+    margin: 0.1rem 0 0.2rem;
+    padding-left: 1.1rem;
+    border-left: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
+}
+
+.tree-label {
+    color: var(--text-subtle);
+    font-weight: 600;
 }
 
 @media (max-width: 1024px) {

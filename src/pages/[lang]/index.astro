@@ -5,8 +5,7 @@ import { buildNavigation, mapHeadings } from "src/utils/navigation";
 import { type Languages } from "src/utils/lang";
 
 export async function getStaticPaths() {
-  const pages = await getCollection("pages");
-
+  const pages = await getCollection("blog");
   const paths = pages.map((page) => {
     const [lang] = page.id.split("/");
     return { params: { lang }, props: page };
@@ -17,7 +16,7 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 const page = Astro.props;
-const entries = await getCollection("pages");
+const entries = await getCollection("blog");
 const { sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
 ---
 

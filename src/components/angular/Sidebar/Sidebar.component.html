@@ -1,19 +1,49 @@
 <aside class="sidebar">
     <nav>
-        <ng-container *ngFor="let group of groupedItems">
-            <div class="sidebar-group" *ngIf="group.label">
+        @for (group of groups; track $index) {
+        <div class="sidebar-group" [class.sidebar-group-plain]="!group.label">
+            @if (group.label) {
                 <div class="sidebar-group-label">{{ group.label }}</div>
-                <a *ngFor="let item of group.items" class="sidebar-link" [class.active]="item.slug === currentSlug"
-                    [href]="item.href">
-                    {{ item.title }}
-                </a>
-            </div>
-            <ng-container *ngIf="!group.label">
-                <a *ngFor="let item of group.items" class="sidebar-link" [class.active]="item.slug === currentSlug"
-                    [href]="item.href">
-                    {{ item.title }}
-                </a>
-            </ng-container>
-        </ng-container>
+            }
+            @if (group.nodes.length) {
+                <ul class="tree-list">
+                    @for (node of group.nodes; track $index) {
+                        <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: node }"></ng-container>
+                    }
+                </ul>
+            }
+        </div>
+        }
     </nav>
+
+    <ng-template #nodeTemplate let-node>
+        <li>
+            <div class="tree-node" [class.tree-node-leaf]="!node.children?.length">
+                @if (node.children?.length) {
+                    <button type="button" class="tree-toggle" (click)="toggleNode(node.id)"
+                        [attr.aria-expanded]="isExpanded(node.id)" [attr.aria-label]="getToggleLabel(node)">
+                        {{ isExpanded(node.id) ? '▾' : '▸' }}
+                    </button>
+                }
+                @else {
+                    <span class="tree-toggle tree-toggle-placeholder"></span>
+                }
+                @if (node.href) {
+                    <a class="sidebar-link" [class.active]="node.slug === currentSlug" [href]="node.href">
+                        {{ node.label }}
+                    </a>
+                }
+                @else {
+                    <span class="tree-label">{{ node.label }}</span>
+                }
+            </div>
+            @if(node.children?.length && isExpanded(node.id)) {
+                <ul class="tree-list tree-children">
+                    @for (child of node.children; track $index) {
+                        <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: child }"></ng-container>
+                    }
+                </ul>
+            }
+        </li>
+    </ng-template>
 </aside>

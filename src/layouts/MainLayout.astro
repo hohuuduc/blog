@@ -60,7 +60,6 @@ const menuItems: NavItem[] = [
   },
 ];
 ---
-
 <!doctype html>
 <html lang={lang} data-theme="light">
   <head>
@@ -130,6 +129,7 @@ const menuItems: NavItem[] = [
       .content-area :global(h1) {
         font-size: 2.2rem;
         margin-bottom: 1rem;
+        overflow-wrap: anywhere;
       }
       .content-area :global(h2) {
         margin-top: 2.5rem;
@@ -175,6 +175,7 @@ const menuItems: NavItem[] = [
         client:load
         items={sidebarItems}
         currentSlug={currentSlug}
+        lang={lang}
       />
       <main class="content-area">
         <slot />

@@ -21,3 +21,16 @@ export interface HeadingLink {
   slug: string;
   text: string;
 }
+
+export interface SidebarTreeNode {
+  id: string;
+  label: string;
+  slug?: string;
+  href?: string;
+  children?: SidebarTreeNode[];
+}
+
+export interface SidebarTreeGroup {
+  label?: string;
+  nodes: SidebarTreeNode[];
+}

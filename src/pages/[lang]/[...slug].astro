@@ -5,7 +5,7 @@ import { buildNavigation, mapHeadings } from "src/utils/navigation";
 import type { Languages } from "@utils/lang";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("pages");
+  const entries = await getCollection("blog");
   const onlyPage = import.meta.env.ONLY_PAGE ?? process.env.ONLY_PAGE;
   return entries
     .filter((entry) => {
@@ -24,12 +24,11 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const page = Astro.props;
 
-const entries = await getCollection("pages");
+const entries = await getCollection("blog");
 const {sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
 
 const { Content, headings } = await page.render();
 ---
-
 <MainLayout
   title={`${page.data.title} | Blog cá nhân`}
   description={page.data.description}
