@@ -166,9 +166,31 @@ const menuItems: NavItem[] = [
           padding: 1.5rem;
         }
       }
+      .toc-drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: color-mix(in srgb, var(--text-strong) 30%, transparent);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+      }
+      body.toc-open .toc-drawer-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      body.toc-open {
+        overflow: hidden;
+      }
+      @media (min-width: 1201px) {
+        .toc-drawer-overlay {
+          display: none !important;
+        }
+      }
     </style>
   </head>
   <body>
+    <div class="toc-drawer-overlay" data-role="toc-overlay" aria-hidden="true"></div>
     <NavBarComponent client:load baseHref={baseHref} lang={lang} navItems={menuItems} />
     <div class="layout-container">
       <SidebarComponent
@@ -183,5 +205,55 @@ const menuItems: NavItem[] = [
       <OnThisPageComponent client:load headings={headings} />
     </div>
     <SettingsDialogComponent client:load lang={lang} />
+    <script is:inline>
+      const overlay = document.querySelector('[data-role="toc-overlay"]');
+      const body = document.body;
+      const toggleSelector = '[data-role="toc-toggle"]';
+      const TOC_OPEN_CLASS = 'toc-open';
+
+      const updateState = (open, options = {}) => {
+        const toggle = document.querySelector(toggleSelector);
+        body.classList.toggle(TOC_OPEN_CLASS, open);
+        toggle?.classList.toggle('is-open', open);
+        toggle?.setAttribute('aria-expanded', String(open));
+        toggle?.setAttribute('aria-label', open ? 'Đóng thanh mục lục' : 'Mở thanh mục lục');
+        if (overlay) {
+          overlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+        }
+        if (!open && options.restoreFocus) {
+          toggle?.focus();
+        }
+      };
+
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) {
+          return;
+        }
+        const toggle = target.closest(toggleSelector);
+        if (!toggle) {
+          return;
+        }
+        event.preventDefault();
+        const isOpen = body.classList.contains(TOC_OPEN_CLASS);
+        updateState(!isOpen);
+      });
+
+      overlay?.addEventListener('click', () => {
+        updateState(false, { restoreFocus: true });
+      });
+
+      window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          updateState(false, { restoreFocus: true });
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 1200) {
+          updateState(false);
+        }
+      });
+    </script>
   </body>
 </html>
