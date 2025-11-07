@@ -108,6 +108,11 @@ export class SidebarComponent extends BaseComponent implements OnChanges {
   private syncExpandedNodes(): void {
     const available = new Set<string>();
     this.collectDirectoryIds(this.nodes, available);
+    for (const node of this.nodes) {
+      if (node.children?.length) {
+        this.expandedNodes.add(node.id);
+      }
+    }
     const slugSegments = this.currentSlug.split('/');
     const directorySegments = slugSegments.slice(this.lang ? 1 : 0, slugSegments.length - 1);
     let currentPath = '';

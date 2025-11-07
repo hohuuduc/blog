@@ -28,7 +28,7 @@ import BaseComponent from './Base.component';
       position: sticky;
       top: 4.5rem;
       padding: 1rem;
-      max-height: calc(100vh - 5rem);
+      max-height: calc(100vh - 8rem);
       overflow-y: auto;
       font-size: 0.85rem;
       color: var(--text-muted);

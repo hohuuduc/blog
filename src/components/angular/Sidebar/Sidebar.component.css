@@ -6,7 +6,7 @@
     position: sticky;
     top: 4.5rem;
     padding: 1rem 1rem 2rem;
-    max-height: calc(100vh - 5rem);
+    max-height: calc(100vh - 9rem);
     overflow-y: auto;
     color: var(--text-muted);
     font-size: 0.9rem;
@@ -62,7 +62,6 @@ h2 {
 .tree-node {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
     padding: 0.2rem 0;
 }
 
@@ -101,13 +100,17 @@ h2 {
 
 .tree-children {
     margin: 0.1rem 0 0.2rem;
-    padding-left: 1.1rem;
+    margin-left: 0.6rem;
+}
+
+.tree-children.line {
     border-left: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
 }
 
 .tree-label {
     color: var(--text-subtle);
     font-weight: 600;
+    padding: 0.3rem 0.4rem;
 }
 
 @media (max-width: 1024px) {

@@ -2,21 +2,20 @@
     <nav>
         <ul class="tree-list">
             @for (node of nodes; track $index) {
-                <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: node }"></ng-container>
+                <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: node, level: 0 }"></ng-container>
             }
         </ul>
     </nav>
-
-    <ng-template #nodeTemplate let-node>
+    <ng-template #nodeTemplate let-node let-level="level">
         <li>
             <div class="tree-node" [class.tree-node-leaf]="!node.children?.length">
-                @if (node.children?.length) {
+                @if (node.children?.length && level > 0) {
                     <button type="button" class="tree-toggle" (click)="toggleNode(node.id)"
                         [attr.aria-expanded]="isExpanded(node.id)" [attr.aria-label]="getToggleLabel(node)">
                         {{ isExpanded(node.id) ? '▾' : '▸' }}
                     </button>
                 }
-                @else {
+                @else if (level > 0) {
                     <span class="tree-toggle tree-toggle-placeholder"></span>
                 }
                 @if (node.href) {
@@ -29,9 +28,9 @@
                 }
             </div>
             @if(node.children?.length && isExpanded(node.id)) {
-                <ul class="tree-list tree-children">
+                <ul class="tree-list tree-children" [class.line]="level > 0">
                     @for (child of node.children; track $index) {
-                        <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: child }"></ng-container>
+                        <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: child, level: level + 1 }"></ng-container>
                     }
                 </ul>
             }
