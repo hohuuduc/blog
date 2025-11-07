@@ -2,7 +2,6 @@
 title: "Personal Notes"
 description: "A place to capture spontaneous thoughts and future plans."
 order: 4
-sidebarGroup: "Explore"
 ---
 
 ## Ongoing Tasks

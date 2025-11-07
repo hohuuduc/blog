@@ -2,7 +2,6 @@
 title: "Ghi chú cá nhân"
 description: "Nơi lưu trữ suy nghĩ ngẫu nhiên và kế hoạch tương lai."
 order: 4
-sidebarGroup: "Khám phá"
 ---
 
 ## Những việc đang ấp ủ

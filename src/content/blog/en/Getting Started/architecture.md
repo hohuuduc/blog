@@ -2,7 +2,6 @@
 title: "Project Architecture"
 description: "Detailed architecture of the Astro + Angular blog."
 order: 2
-sidebarGroup: "Getting Started"
 ---
 
 ## Data Flow

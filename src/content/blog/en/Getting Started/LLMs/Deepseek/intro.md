@@ -2,7 +2,6 @@
 title: "Deepseek overview"
 description: "An introduction to the Deepseek model family."
 order: 20
-sidebarGroup: "LLMs"
 ---
 
 ## About Deepseek

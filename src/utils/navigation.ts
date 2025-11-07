@@ -57,7 +57,6 @@ export function buildNavigation(entries: CollectionEntry<'blog'>[], lang: Langua
   const sidebarItems = sorted.map((entry) => ({
     title: entry.data.title,
     slug: entry.slug,
-    group: entry.data.sidebarGroup,
     href: buildHref(entry.slug)
   }));
 

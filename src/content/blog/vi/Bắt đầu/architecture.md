@@ -2,7 +2,6 @@
 title: "Kiến trúc dự án"
 description: "Chi tiết kiến trúc của blog Astro + Angular."
 order: 2
-sidebarGroup: "Bắt đầu"
 ---
 
 ## Luồng dữ liệu

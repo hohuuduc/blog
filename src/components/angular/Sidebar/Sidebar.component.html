@@ -1,19 +1,10 @@
 <aside class="sidebar">
     <nav>
-        @for (group of groups; track $index) {
-        <div class="sidebar-group" [class.sidebar-group-plain]="!group.label">
-            @if (group.label) {
-                <div class="sidebar-group-label">{{ group.label }}</div>
+        <ul class="tree-list">
+            @for (node of nodes; track $index) {
+                <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: node }"></ng-container>
             }
-            @if (group.nodes.length) {
-                <ul class="tree-list">
-                    @for (node of group.nodes; track $index) {
-                        <ng-container *ngTemplateOutlet="nodeTemplate; context: { $implicit: node }"></ng-container>
-                    }
-                </ul>
-            }
-        </div>
-        }
+        </ul>
     </nav>
 
     <ng-template #nodeTemplate let-node>

@@ -2,7 +2,6 @@
 title: "Deepseek deployment checklist"
 description: "Operational considerations before rolling out a Deepseek service."
 order: 21
-sidebarGroup: "LLMs"
 ---
 
 ## Pre-deployment

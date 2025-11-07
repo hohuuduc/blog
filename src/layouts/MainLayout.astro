@@ -180,7 +180,7 @@ const menuItems: NavItem[] = [
       <main class="content-area">
         <slot />
       </main>
-      <OnThisPageComponent client:load headings={headings} />
+      <OnThisPageComponent client:load headings={headings} lang={lang} />
     </div>
     <SettingsDialogComponent client:load lang={lang} />
   </body>

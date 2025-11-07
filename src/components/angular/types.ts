@@ -12,7 +12,6 @@ export interface NavItem {
 export interface SidebarItem {
   title: string;
   slug: string;
-  group?: string;
   href: string;
 }
 
@@ -28,9 +27,4 @@ export interface SidebarTreeNode {
   slug?: string;
   href?: string;
   children?: SidebarTreeNode[];
-}
-
-export interface SidebarTreeGroup {
-  label?: string;
-  nodes: SidebarTreeNode[];
 }

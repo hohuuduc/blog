@@ -76,17 +76,6 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
     this.theme.set(option);
   }
 
-  getThemeLabel(option: ThemeOption) {
-    switch (option) {
-      case 'system':
-        return 'Tự động (theo hệ thống)';
-      case 'light':
-        return 'Sáng';
-      case 'dark':
-        return 'Tối';
-    }
-  }
-
   private applyTheme(option: ThemeOption) {
     if (typeof document === 'undefined') return;
     const root = document.documentElement;

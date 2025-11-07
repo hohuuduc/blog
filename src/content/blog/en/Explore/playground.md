@@ -2,7 +2,6 @@
 title: "Playground"
 description: "A sandbox for quick experiments with handy snippets."
 order: 3
-sidebarGroup: "Explore"
 ---
 
 ## Introduction

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import type { HeadingLink } from './types';
+import BaseComponent from './Base.component';
 
 @Component({
   selector: 'on-this-page',
@@ -15,7 +16,7 @@ import type { HeadingLink } from './types';
         </a>
       </nav>
       <ng-template #empty>
-        <p>Không có mục lục cho trang này.</p>
+        <p>{{getString("right_panel.no_headings")}}</p>
       </ng-template>
     </aside>
   `,
@@ -58,7 +59,7 @@ import type { HeadingLink } from './types';
     }
   `]
 })
-export class OnThisPageComponent {
+export class OnThisPageComponent extends BaseComponent {
   @Input({ required: true }) headings: HeadingLink[] = [];
 }
 

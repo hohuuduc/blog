@@ -2,7 +2,6 @@
 title: "Chào mừng đến với blog"
 description: "Giới thiệu tổng quan về blog cá nhân được xây dựng với Astro và Angular."
 order: 1
-sidebarGroup: "Bắt đầu"
 ---
 
 ## Tầm nhìn

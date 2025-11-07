@@ -2,7 +2,6 @@
 title: "Starting"
 description: "Here is a sample article in Vietnamese about LLMs (Large Language Models), focusing on the technical components."
 order: 2
-sidebarGroup: "Getting Started"
 ---
 # 🔍 Technical Overview of LLMs (Large Language Models)
 

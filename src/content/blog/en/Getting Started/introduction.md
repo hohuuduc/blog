@@ -2,7 +2,6 @@
 title: "Welcome to the blog"
 description: "An overview of this personal blog built with Astro and Angular."
 order: 1
-sidebarGroup: "Getting Started"
 ---
 
 ## Overview

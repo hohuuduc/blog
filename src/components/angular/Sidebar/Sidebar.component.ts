@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import type { OnChanges, SimpleChanges } from '@angular/core';
-import type { SidebarItem, SidebarTreeGroup, SidebarTreeNode } from '../types';
+import type { SidebarItem, SidebarTreeNode } from '../types';
 import BaseComponent from '../Base.component';
 import type { Languages } from '@utils/lang';
 
@@ -16,11 +16,11 @@ export class SidebarComponent extends BaseComponent implements OnChanges {
   @Input({ required: true }) items: SidebarItem[] = [];
   @Input({ required: true }) currentSlug = '';
 
-  groups: SidebarTreeGroup[] = [];
+  nodes: SidebarTreeNode[] = [];
   private expandedNodes = new Set<string>();
 
   ngOnChanges(_: SimpleChanges): void {
-    this.groups = this.buildGroups();
+    this.nodes = this.buildTreeForGroup(this.items, this.lang);
     this.syncExpandedNodes();
   }
 
@@ -41,25 +41,7 @@ export class SidebarComponent extends BaseComponent implements OnChanges {
     return `${action} ${node.label}`;
   }
 
-  private buildGroups(): SidebarTreeGroup[] {
-    const groupMap = new Map<string | undefined, SidebarItem[]>();
-
-    for (const item of this.items) {
-      const key = item.group ?? undefined;
-      if (!groupMap.has(key)) {
-        groupMap.set(key, []);
-      }
-      groupMap.get(key)!.push(item);
-    }
-
-    return Array.from(groupMap.entries()).map(([label, groupItems]) => ({
-      label,
-      nodes: this.buildTreeForGroup(groupItems, this.lang)
-    }));
-  }
-
   private buildTreeForGroup(items: SidebarItem[], lang: Languages): SidebarTreeNode[] {
-
     const tree: SidebarTreeNode[] = [];
     for (const item of items) {
       const pathSegments = item.slug.split('/').slice(1);
@@ -125,13 +107,9 @@ export class SidebarComponent extends BaseComponent implements OnChanges {
 
   private syncExpandedNodes(): void {
     const available = new Set<string>();
-    for (const group of this.groups) {
-      this.collectDirectoryIds(group.nodes, available);
-    }
-
-    const lang = this.currentSlug.split('/')[0];
+    this.collectDirectoryIds(this.nodes, available);
     const slugSegments = this.currentSlug.split('/');
-    const directorySegments = slugSegments.slice(lang ? 1 : 0, slugSegments.length - 1);
+    const directorySegments = slugSegments.slice(this.lang ? 1 : 0, slugSegments.length - 1);
     let currentPath = '';
     for (const segment of directorySegments) {
       currentPath = currentPath ? `${currentPath}/${segment}` : segment;

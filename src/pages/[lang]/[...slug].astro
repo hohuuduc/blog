@@ -2,7 +2,7 @@
 import MainLayout from "src/layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
 import { buildNavigation, mapHeadings } from "src/utils/navigation";
-import type { Languages } from "@utils/lang";
+import { strings, type Languages } from "@utils/lang";
 
 export async function getStaticPaths() {
   const entries = await getCollection("blog");
@@ -30,7 +30,7 @@ const {sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
 const { Content, headings } = await page.render();
 ---
 <MainLayout
-  title={`${page.data.title} | Blog cá nhân`}
+  title={`${page.data.title} | ${strings[lang as Languages]['title']}`}
   description={page.data.description}
   sidebarItems={sidebarItems}
   currentSlug={page.slug}

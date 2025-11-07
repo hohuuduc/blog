@@ -2,7 +2,6 @@
 title: "Playground"
 description: "Khu vực thử nghiệm với các snippet thú vị."
 order: 3
-sidebarGroup: "Khám phá"
 ---
 
 ## Ý tưởng
