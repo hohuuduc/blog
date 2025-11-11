@@ -1,7 +1,7 @@
 ---
 title: "Deepseek overview"
 description: "An introduction to the Deepseek model family."
-date: 2025/11/09
+date: 2025-11-09
 order: 20
 ---
 
