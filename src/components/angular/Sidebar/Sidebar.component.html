@@ -24,7 +24,7 @@
                     </a>
                 }
                 @else {
-                    <span class="tree-label">{{ node.label }}</span>
+                    <span class="tree-label">{{ getString(`nav.group.${node.label}`) }}</span>
                 }
             </div>
             @if(node.children?.length && isExpanded(node.id)) {

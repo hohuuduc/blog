@@ -43,16 +43,16 @@ const date = page.data.date ? new Date(page.data.date) : new Date();
     <div class="page-header">
       <h1>{page.data.title}</h1>
     </div>
-          <p class="publish-date">
-        {
-          date.toLocaleDateString(lang, {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
-      </p>
+    <p class="publish-date">
+      {
+        new Intl.DateTimeFormat(lang, {
+          weekday: "long",
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        }).format(date)
+      }
+    </p>
     <Content />
   </article>
 </MainLayout>

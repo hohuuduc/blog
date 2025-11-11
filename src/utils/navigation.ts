@@ -59,7 +59,6 @@ export function buildNavigation(entries: CollectionEntry<'blog'>[], lang: Langua
     slug: entry.slug,
     href: buildHref(entry.slug)
   }));
-
   return { sidebarItems, baseHref: homeHref };
 }
 

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild, signal } from '@angular/core';
 import type { OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import lunr from 'lunr';
-
 import BaseComponent from '../Base.component';
 import type { NavItem } from '../types';
 import type { SearchDocument, SearchIndexPayload } from '@utils/search';

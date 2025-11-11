@@ -29,6 +29,7 @@
     "@angular-devkit/build-angular": "^20.3.8",
     "@angular/compiler-cli": "^20.3.9",
     "@angular/language-service": "^20.3.9",
+    "@types/lunr": "^2.3.7",
     "@types/node": "^22.10.1",
     "astro-icon": "^0.8.1",
     "execa": "^9.5.2",

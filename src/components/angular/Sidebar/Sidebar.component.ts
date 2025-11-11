@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import type { OnChanges, SimpleChanges } from '@angular/core';
 import type { SidebarItem, SidebarTreeNode } from '../types';
 import BaseComponent from '../Base.component';
-import type { Languages } from '@utils/lang';
+import { strings, type Languages, type Strings } from '@utils/lang';
 
 @Component({
   selector: 'sidebar-list',
@@ -37,8 +37,8 @@ export class SidebarComponent extends BaseComponent implements OnChanges {
   }
 
   getToggleLabel(node: SidebarTreeNode): string {
-    const action = this.isExpanded(node.id) ? 'Thu gọn' : 'Mở rộng';
-    return `${action} ${node.label}`;
+    const action: Strings = this.isExpanded(node.id) ? 'nav.collapse' : 'nav.expand';
+    return `${strings[this.lang][action]} ${node.label}`;
   }
 
   private buildTreeForGroup(items: SidebarItem[], lang: Languages): SidebarTreeNode[] {
@@ -67,7 +67,7 @@ export class SidebarComponent extends BaseComponent implements OnChanges {
     if (!node) {
       node = {
         id: nodeId,
-        label: this.formatSegment(current),
+        label: current,
         children: []
       };
       nodes.push(node);
@@ -76,33 +76,6 @@ export class SidebarComponent extends BaseComponent implements OnChanges {
       node.children = [];
     }
     this.insertTreeNode(node.children, rest, item, nodeId);
-  }
-
-  private formatSegment(segment: string): string {
-    return segment
-      .split(/[-_]/g)
-      .filter(Boolean)
-      .map((part) => this.humanizeSegmentPart(part))
-      .join(' ');
-  }
-
-  private humanizeSegmentPart(part: string): string {
-    const trimmed = part.trim();
-    if (!trimmed) {
-      return '';
-    }
-
-    const lower = trimmed.toLowerCase();
-    if (/^[a-z]+$/.test(lower)) {
-      if (lower.length <= 3) {
-        return lower.toUpperCase();
-      }
-      if (lower.endsWith('s') && lower.slice(0, -1).length <= 3) {
-        return `${lower.slice(0, -1).toUpperCase()}s`;
-      }
-    }
-
-    return lower.charAt(0).toUpperCase() + lower.slice(1);
   }
 
   private syncExpandedNodes(): void {
