@@ -1,7 +1,7 @@
 ---
 title: "Starting"
 description: "Dưới đây là một bài viết mẫu bằng tiếng Việt về LLMs (Large Language Models), tập trung vào thành phần kỹ thuật."
-date: 2025/09/09
+date: 2025-09-09
 order: 2
 ---
 # 🔍 Tổng quan kỹ thuật về LLMs (Large Language Models)
