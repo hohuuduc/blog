@@ -20,7 +20,11 @@ export const strings = {
     'theme.light': 'Light',
     'theme.dark': 'Dark',
     'theme.system': 'System (Auto)',
-    'right_panel.no_headings': 'There is no table of contents for this page.'
+    'right_panel.no_headings': 'There is no table of contents for this page.',
+    'nav.group.Getting Started': 'Getting Started',
+    'nav.group.Explore': 'Explore',
+    'nav.group.LLMs': 'LLMs',
+    'nav.group.Deepseek': 'Deepseek',
     // …
   },
   vi: {
@@ -45,6 +49,10 @@ export const strings = {
     'theme.dark': 'Tối',
     'theme.system': 'Hệ thống (Tự động)',
     'right_panel.no_headings': 'Không có mục lục cho trang này.',
+    'nav.group.Getting Started': 'Bắt đầu',
+    'nav.group.Explore': 'Khám phá',
+    'nav.group.LLMs': 'LLMs',
+    'nav.group.Deepseek': 'Deepseek',
     // …
   },
 } as const;

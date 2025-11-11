@@ -4,8 +4,6 @@ description: "An introduction to the Deepseek model family."
 order: 20
 ---
 
-## About Deepseek
-
 Deepseek is a family of large language models focused on reasoning-heavy tasks. This introductory note summarises the main variants and key differentiators.
 
 ### Model lineup

@@ -15,9 +15,7 @@
 h2 {
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: 0.75rem;
-    color: var(--text-subtle);
 }
 
 .sidebar-group+.sidebar-group {

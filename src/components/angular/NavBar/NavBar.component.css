@@ -135,7 +135,6 @@
     transform: translateY(-50%);
     border: none;
     background: transparent;
-    color: var(--text-subtle);
     cursor: pointer;
     font-size: 1.25rem;
     line-height: 1;

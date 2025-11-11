@@ -15,8 +15,8 @@ export async function getStaticPaths() {
     .map((entry) => {
       const [lang, ...slug] = entry.slug.split("/");
       return {
-        params: { lang: lang, slug: slug.join('/') },
-        props: entry ,
+        params: { lang: lang, slug: slug.join("/") },
+        props: entry,
       };
     });
 }
@@ -25,12 +25,13 @@ const { lang } = Astro.params;
 const page = Astro.props;
 
 const entries = await getCollection("blog");
-const {sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
-
+const { sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
 const { Content, headings } = await page.render();
+const date = page.data.date ? new Date(page.data.date) : new Date();
 ---
+
 <MainLayout
-  title={`${page.data.title} | ${strings[lang as Languages]['title']}`}
+  title={`${page.data.title} | ${strings[lang as Languages]["title"]}`}
   description={page.data.description}
   sidebarItems={sidebarItems}
   currentSlug={page.slug}
@@ -39,8 +40,19 @@ const { Content, headings } = await page.render();
   lang={lang}
 >
   <article>
-    <h1>{page.data.title}</h1>
-    <p>{page.data.date?.toLocaleString(lang)}</p>
+    <div class="page-header">
+      <h1>{page.data.title}</h1>
+    </div>
+          <p class="publish-date">
+        {
+          date.toLocaleDateString(lang, {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
+      </p>
     <Content />
   </article>
 </MainLayout>

@@ -38,7 +38,6 @@ import BaseComponent from './Base.component';
       text-transform: uppercase;
       letter-spacing: 0.12em;
       margin-bottom: 0.75rem;
-      color: var(--text-subtle);
     }
     .heading-link {
       display: block;
