@@ -8,6 +8,7 @@ import type { HeadingLink } from "../components/angular/types";
 import { resolveBaseSegment } from "@utils/navigation";
 import { type NavItem } from "../components/angular/types";
 import type { Languages } from "@utils/lang";
+import Giscus from "../components/Giscus.astro";
 
 interface Props {
   title: string;
@@ -202,6 +203,7 @@ const menuItems: NavItem[] = [
       />
       <main class="content-area">
         <slot />
+        <Giscus />
       </main>
       <OnThisPageComponent client:load headings={headings} lang={lang} />
     </div>
