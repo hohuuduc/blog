@@ -7,10 +7,10 @@ import { SettingsDialogComponent } from "../components/angular/SerttingsDialog/S
 import type { HeadingLink } from "../components/angular/types";
 import { resolveBaseSegment } from "@utils/navigation";
 import { type NavItem } from "../components/angular/types";
-import type { Languages } from "@utils/lang";
+import { strings, type Languages } from "@utils/lang";
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   sidebarItems: {
     title: string;
@@ -59,6 +59,8 @@ const menuItems: NavItem[] = [
     ],
   },
 ];
+
+const subTitle = strings[lang as Languages]["title"];
 ---
 
 <!doctype html>
@@ -66,7 +68,8 @@ const menuItems: NavItem[] = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <title>{title ? `${title} | ${subTitle}` : subTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -110,18 +113,22 @@ const menuItems: NavItem[] = [
           sans-serif;
         min-height: 100vh;
       }
-      main {
+      main,
+      #giscus-container {
         background: var(--surface-elevated);
         border-radius: 1.25rem;
         padding: 2.5rem;
         box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
       }
+      #giscus-container {
+        margin-top: 2rem;
+      }
       .layout-container {
         display: grid;
-        grid-template-columns: 260px minmax(1050px, 1fr) 220px;
+        grid-template-columns: 260px minmax(950px, 1fr) 220px;
         gap: 2rem;
         margin: 0 auto;
-        max-width: calc(1050px + 260px + 220px + 4rem);
+        max-width: calc(950px + 260px + 220px + 4rem);
         padding: 2rem;
       }
       .content-area {
@@ -200,9 +207,12 @@ const menuItems: NavItem[] = [
         currentSlug={currentSlug}
         lang={lang}
       />
-      <main class="content-area">
-        <slot />
-      </main>
+      <div>
+        <main class="content-area">
+          <slot />
+        </main>
+        <div id="giscus-container"></div>
+      </div>
       <OnThisPageComponent client:load headings={headings} lang={lang} />
     </div>
     <SettingsDialogComponent client:load lang={lang} />

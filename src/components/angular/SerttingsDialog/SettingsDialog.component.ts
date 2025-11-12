@@ -82,9 +82,41 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
     const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
     const theme = option === 'system' ? (prefersDark ? 'dark' : 'light') : option;
     root.dataset.theme = theme;
+    const iframe = document.querySelector('iframe.giscus-frame') as HTMLIFrameElement | null;
+    if (iframe)
+      iframe.contentWindow?.postMessage(
+        {
+          giscus: {
+            setConfig: {
+              theme: theme,
+            },
+          },
+        },
+        'https://giscus.app'
+      );
+    else {
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.setAttribute('data-repo', 'hohuuduc/blog');
+      script.setAttribute('data-repo-id', 'R_kgDOQNou3g');
+      script.setAttribute('data-category', 'General');
+      script.setAttribute('data-category-id', 'DIC_kwDOQNou3s4Cxtsg');
+      script.setAttribute('data-mapping', 'og:title');
+      script.setAttribute('data-strict', '1');
+      script.setAttribute('data-reactions-enabled', '0');
+      script.setAttribute('data-emit-metadata', '1');
+      script.setAttribute('data-input-position', 'top');
+      script.setAttribute('data-lang', this.lang);
+      script.setAttribute('data-theme', theme);
+      script.setAttribute('data-loading', 'lazy');
+
+      document.getElementById('giscus-container')?.appendChild(script);
+    }
   }
 
-  changeLanguage(lang: Languages,option: Languages) {
+  changeLanguage(lang: Languages, option: Languages) {
     let href = window.location.href;
 
     switch (option) {

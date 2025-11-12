@@ -31,7 +31,7 @@ const date = page.data.date ? new Date(page.data.date) : new Date();
 ---
 
 <MainLayout
-  title={`${page.data.title} | ${strings[lang as Languages]["title"]}`}
+  title={page.data.title}
   description={page.data.description}
   sidebarItems={sidebarItems}
   currentSlug={page.slug}
