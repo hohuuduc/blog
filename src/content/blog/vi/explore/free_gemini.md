@@ -1,3 +1,9 @@
+---
+title: "Gemini free"
+description: ""
+order: 5
+---
+
 1. Vào trang one.google.com/ai-student
 2. Nhấn "Xác minh điều kiện sử dụng" → bị điều hướng đến trang sheerid
 3. Copy url sheerid
