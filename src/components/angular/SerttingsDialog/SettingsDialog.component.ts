@@ -97,18 +97,9 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
 
   private applyComments(show: boolean) {
     if (typeof document === 'undefined') return;
-    let container = document.getElementById('giscus-container');
-    if (show) {
-      if (!container) {
-        container = document.createElement('div');
-        container.id = 'giscus-container';
-        document.querySelector('main')?.appendChild(container);
-        this.createGiscusScript();
-      } else {
-        container.style.display = '';
-      }
-    } else if (container) {
-      container.style.display = 'none';
+    const container = document.getElementById('giscus-container');
+    if (container) {
+      container.style.display = show ? '' : 'none';
     }
   }
 
@@ -130,41 +121,26 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
         },
         'https://giscus.app'
       );
-    else {
-      const giscusScript = document.querySelector('script[src="https://giscus.app/client.js"]');
-      if (!giscusScript) this.createGiscusScript();
+    else if (!document.querySelector('script[src="https://giscus.app/client.js"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.setAttribute('data-repo', 'hohuuduc/blog');
+      script.setAttribute('data-repo-id', 'R_kgDOQNou3g');
+      script.setAttribute('data-category', 'General');
+      script.setAttribute('data-category-id', 'DIC_kwDOQNou3s4Cxtsg');
+      script.setAttribute('data-mapping', 'og:title');
+      script.setAttribute('data-strict', '1');
+      script.setAttribute('data-reactions-enabled', '0');
+      script.setAttribute('data-emit-metadata', '1');
+      script.setAttribute('data-input-position', 'top');
+      script.setAttribute('data-lang', this.lang);
+      script.setAttribute('data-theme', theme);
+      script.setAttribute('data-loading', 'lazy');
+
+      document.getElementById('giscus-container')?.appendChild(script);
     }
-  }
-
-  private createGiscusScript() {
-    if (typeof document === 'undefined') return;
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
-    script.async = true;
-    script.crossOrigin = 'anonymous';
-    script.setAttribute('data-repo', 'hohuuduc/blog');
-    script.setAttribute('data-repo-id', 'R_kgDOQNou3g');
-    script.setAttribute('data-category', 'General');
-    script.setAttribute('data-category-id', 'DIC_kwDOQNou3s4Cxtsg');
-    script.setAttribute('data-mapping', 'og:title');
-    script.setAttribute('data-strict', '1');
-    script.setAttribute('data-reactions-enabled', '0');
-    script.setAttribute('data-emit-metadata', '1');
-    script.setAttribute('data-input-position', 'top');
-    script.setAttribute('data-lang', this.lang);
-    script.setAttribute(
-      'data-theme',
-      (() => {
-        const option = this.theme();
-        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
-        const theme = option === 'system' ? (prefersDark ? 'dark' : 'light') : option;
-
-        return theme;
-      })()
-    );
-    script.setAttribute('data-loading', 'lazy');
-
-    document.getElementById('giscus-container')?.appendChild(script);
   }
 
   changeLanguage(lang: Languages, option: Languages) {
