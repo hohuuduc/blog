@@ -27,6 +27,7 @@ const { sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
   headings={mapHeadings((await page.render()).headings)}
   baseHref={baseHref}
   lang={lang as Languages}
+  showComments={false}
 >
   <section>
     <h1>Chào mừng đến với không gian cá nhân</h1>

@@ -22,7 +22,7 @@ interface Props {
   headings: HeadingLink[];
   baseHref: string;
   lang: Languages;
-  showComments?: boolean;
+  showComments: boolean;
 }
 
 const {
@@ -33,7 +33,7 @@ const {
   headings,
   baseHref,
   lang,
-  showComments = false,
+  showComments = true,
 } = Astro.props as Props;
 
 const menuItems: NavItem[] = [
@@ -63,6 +63,7 @@ const menuItems: NavItem[] = [
 ];
 
 const subTitle = strings[lang as Languages]["title"];
+console.log(showComments)
 ---
 
 <!doctype html>
@@ -82,9 +83,8 @@ const subTitle = strings[lang as Languages]["title"];
     <script is:inline>
       const savedComments = localStorage.getItem('personal-blog-comments');
       if (savedComments === 'false') {
-        const style = document.createElement('style');
-        style.textContent = '#giscus-container { display: none; }';
-        document.head.appendChild(style);
+        const giscus = document.getElementById('giscus-container');
+        giscus.style.display = 'none';
       }
     </script>
     <style>
