@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true
+    if: github.ref == 'refs/heads/main' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -39,7 +39,7 @@ jobs:
           path: dist
 
   deploy:
-    if: github.event.pull_request.merged == true
+    if: github.ref == 'refs/heads/main' || github.event.pull_request.merged == true
     needs: build
     runs-on: ubuntu-latest
     environment:
