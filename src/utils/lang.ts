@@ -27,6 +27,8 @@ export const strings = {
     'nav.group.explore': 'Explore',
     'nav.group.llms': 'LLMs',
     'nav.group.deepseek': 'Deepseek',
+    'comments': 'Discussion',
+    'comments.show': 'Show/Hide discussion content'
     // …
   },
   vi: {
@@ -57,6 +59,8 @@ export const strings = {
     'nav.group.explore': 'Khám phá',
     'nav.group.llms': 'LLMs',
     'nav.group.deepseek': 'Deepseek',
+    'comments': 'Thảo luận',
+    'comments.show': 'Ẩn/hiện nội dung thảo luận'
     // …
   },
 } as const;
