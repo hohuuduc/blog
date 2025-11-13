@@ -79,6 +79,14 @@ const subTitle = strings[lang as Languages]["title"];
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      const savedComments = localStorage.getItem('personal-blog-comments');
+      if (savedComments === 'false') {
+        const style = document.createElement('style');
+        style.textContent = '#giscus-container { display: none; }';
+        document.head.appendChild(style);
+      }
+    </script>
     <style>
       :root {
         color-scheme: light;
