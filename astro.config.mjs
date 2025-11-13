@@ -22,8 +22,5 @@ export default defineConfig({
   i18n: {
     locales: ["en", "vi"],
     defaultLocale: "vi",
-    routing: {
-      prefixDefaultLocale: true
-    },
   }
 });

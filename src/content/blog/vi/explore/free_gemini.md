@@ -1,7 +1,5 @@
 ---
 title: "Gemini free"
-description: ""
-order: 5
 ---
 
 1. Vào trang one.google.com/ai-student

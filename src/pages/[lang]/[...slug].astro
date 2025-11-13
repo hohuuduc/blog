@@ -2,7 +2,7 @@
 import MainLayout from "src/layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
 import { buildNavigation, mapHeadings } from "src/utils/navigation";
-import { strings, type Languages } from "@utils/lang";
+import { type Languages } from "@utils/lang";
 
 export async function getStaticPaths() {
   const entries = await getCollection("blog");
@@ -27,7 +27,7 @@ const page = Astro.props;
 const entries = await getCollection("blog");
 const { sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
 const { Content, headings } = await page.render();
-const date = page.data.date ? new Date(page.data.date) : new Date();
+console.log(page.data.date);
 ---
 
 <MainLayout
@@ -38,7 +38,7 @@ const date = page.data.date ? new Date(page.data.date) : new Date();
   headings={mapHeadings(headings)}
   baseHref={baseHref}
   lang={lang}
-  showComments={true}
+  showComments={page.data.allowDiscussion}
 >
   <article>
     <div class="page-header">
@@ -46,12 +46,13 @@ const date = page.data.date ? new Date(page.data.date) : new Date();
     </div>
     <p class="publish-date">
       {
-        new Intl.DateTimeFormat(lang, {
-          weekday: "long",
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        }).format(date)
+        page.data.date &&
+          new Intl.DateTimeFormat(lang, {
+            weekday: "long",
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          }).format(page.data.date)
       }
     </p>
     <Content />
