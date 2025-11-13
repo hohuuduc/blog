@@ -13,9 +13,6 @@ export default defineConfig({
     })
   ],
   output: 'static',
-  build: {
-    assetsPrefix: `/${process.env.URL_PAGE}/`
-  },
   experimental: {
     contentIntellisense: true
   },

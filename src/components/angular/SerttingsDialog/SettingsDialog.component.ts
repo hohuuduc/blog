@@ -56,6 +56,30 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
         }
         this.applyComments(current);
     });
+
+    effect(() => {
+      if (typeof document === 'undefined') return;
+      if (this.showComments() && !document.querySelector('script[src="https://giscus.app/client.js"]')) {
+        const script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.async = true;
+        script.crossOrigin = 'anonymous';
+        script.setAttribute('data-repo', 'hohuuduc/blog');
+        script.setAttribute('data-repo-id', 'R_kgDOQNou3g');
+        script.setAttribute('data-category', 'General');
+        script.setAttribute('data-category-id', 'DIC_kwDOQNou3s4Cxtsg');
+        script.setAttribute('data-mapping', 'og:title');
+        script.setAttribute('data-strict', '1');
+        script.setAttribute('data-reactions-enabled', '0');
+        script.setAttribute('data-emit-metadata', '1');
+        script.setAttribute('data-input-position', 'top');
+        script.setAttribute('data-lang', this.lang);
+        script.setAttribute('data-theme', this.theme() === 'dark' ? 'dark' : 'light');
+        script.setAttribute('data-loading', 'lazy');
+
+        document.getElementById('giscus-container')?.appendChild(script);
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -121,26 +145,6 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
         },
         'https://giscus.app'
       );
-    else if (!document.querySelector('script[src="https://giscus.app/client.js"]')) {
-      const script = document.createElement('script');
-      script.src = 'https://giscus.app/client.js';
-      script.async = true;
-      script.crossOrigin = 'anonymous';
-      script.setAttribute('data-repo', 'hohuuduc/blog');
-      script.setAttribute('data-repo-id', 'R_kgDOQNou3g');
-      script.setAttribute('data-category', 'General');
-      script.setAttribute('data-category-id', 'DIC_kwDOQNou3s4Cxtsg');
-      script.setAttribute('data-mapping', 'og:title');
-      script.setAttribute('data-strict', '1');
-      script.setAttribute('data-reactions-enabled', '0');
-      script.setAttribute('data-emit-metadata', '1');
-      script.setAttribute('data-input-position', 'top');
-      script.setAttribute('data-lang', this.lang);
-      script.setAttribute('data-theme', theme);
-      script.setAttribute('data-loading', 'lazy');
-
-      document.getElementById('giscus-container')?.appendChild(script);
-    }
   }
 
   changeLanguage(lang: Languages, option: Languages) {

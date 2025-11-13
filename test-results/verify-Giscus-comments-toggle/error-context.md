@@ -1,0 +1,93 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Duc's Blog" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e6]:
+        - link "Tài liệu" [ref=e8] [cursor=pointer]:
+          - /url: //vi/
+        - link "Giới thiệu" [ref=e10] [cursor=pointer]:
+          - /url: /about
+        - generic [ref=e12]: Dự án khác
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - generic [ref=e15]: Tìm kiếm bài viết
+          - searchbox "Tìm kiếm bài viết" [ref=e16]
+        - button "Cài đặt" [ref=e17] [cursor=pointer]:
+          - generic [ref=e18]: Cài đặt
+          - img [ref=e19]
+  - generic [ref=e21]:
+    - complementary [ref=e23]:
+      - navigation [ref=e24]:
+        - list [ref=e25]:
+          - listitem [ref=e26]:
+            - generic [ref=e28]: Bắt đầu
+            - list [ref=e29]:
+              - listitem [ref=e30]:
+                - link "Chào mừng đến với blog" [ref=e32] [cursor=pointer]:
+                  - /url: /vi/starting/introduction
+              - listitem [ref=e33]:
+                - link "Kiến trúc dự án" [ref=e35] [cursor=pointer]:
+                  - /url: /vi/starting/architecture
+              - listitem [ref=e36]:
+                - generic [ref=e37]:
+                  - button "Mở rộng llms" [ref=e38] [cursor=pointer]: ▸
+                  - generic [ref=e39]: LLMs
+          - listitem [ref=e40]:
+            - generic [ref=e42]: Khám phá
+            - list [ref=e43]:
+              - listitem [ref=e44]:
+                - link "Playground" [ref=e46] [cursor=pointer]:
+                  - /url: /vi/explore/playground
+              - listitem [ref=e47]:
+                - link "Ghi chú cá nhân" [ref=e49] [cursor=pointer]:
+                  - /url: /vi/explore/personal-notes
+              - listitem [ref=e50]:
+                - link "Gemini free" [ref=e52] [cursor=pointer]:
+                  - /url: /vi/explore/free_gemini
+    - generic [ref=e53]:
+      - main [ref=e54]:
+        - article [ref=e55]:
+          - heading "Ghi chú cá nhân" [level=1] [ref=e57]
+          - paragraph [ref=e58]: Thứ Năm, 13 tháng 11, 2025
+          - heading "Những việc đang ấp ủ" [level=2] [ref=e59]
+          - list [ref=e60]:
+            - listitem [ref=e61]: Hoàn thiện theme chuyển đổi theo thời gian thực.
+            - listitem [ref=e62]: Mở rộng trang Playground với các bài viết dạng interactive.
+            - listitem [ref=e63]: Tích hợp analytics cho site tĩnh.
+          - heading "Châm ngôn yêu thích" [level=3] [ref=e64]
+          - blockquote [ref=e65]:
+            - paragraph [ref=e66]: Viết ra suy nghĩ của bạn, vì đó là cách nhanh nhất để khiến chúng trở nên rõ ràng.
+      - iframe [ref=e69]:
+        - generic [active] [ref=f1e1]:
+          - main [ref=f1e3]:
+            - generic [ref=f1e5]:
+              - heading "0 bình luận" [level=4] [ref=f1e8]
+              - generic [ref=f1e9]:
+                - generic [ref=f1e10]:
+                  - generic [ref=f1e11]:
+                    - button "Viết Bình Luận" [ref=f1e12] [cursor=pointer]
+                    - button "Xem Trước" [ref=f1e13] [cursor=pointer]
+                  - button "Bật phông chữ có độ rộng cố định (monospace) trong trình chỉnh sửa" [ref=f1e15] [cursor=pointer]:
+                    - img [ref=f1e16]
+                - generic [ref=f1e19]:
+                  - textbox "Đăng nhập để bình luận" [disabled] [ref=f1e20]
+                  - link "Tạo kiểu với Markdown được hỗ trợ" [ref=f1e22] [cursor=pointer]:
+                    - /url: https://guides.github.com/features/mastering-markdown/
+                    - img [ref=f1e23]
+                - link "Đăng nhập bằng GitHub" [ref=f1e27] [cursor=pointer]:
+                  - /url: /api/oauth/authorize?redirect_uri=http%3A%2F%2Flocalhost%3A4321%2Fvi%2Fexplore%2Fpersonal-notes%2F
+                  - img [ref=f1e28]
+                  - text: Đăng nhập bằng GitHub
+          - alert [ref=f1e30]
+    - complementary [ref=e71]:
+      - heading "On this page" [level=2] [ref=e72]
+      - navigation [ref=e73]:
+        - link "Những việc đang ấp ủ" [ref=e74] [cursor=pointer]:
+          - /url: "#những-việc-đang-ấp-ủ"
+        - link "Châm ngôn yêu thích" [ref=e75] [cursor=pointer]:
+          - /url: "#châm-ngôn-yêu-thích"
+```

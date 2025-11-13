@@ -221,7 +221,7 @@ const subTitle = strings[lang as Languages]["title"];
         <main class="content-area">
           <slot />
         </main>
-        {showComments && <div id="giscus-container"></div>}
+        <div id="giscus-container" style={!showComments ? "display: none;" : ""}></div>
       </div>
       <OnThisPageComponent client:load headings={headings} lang={lang} />
     </div>
