@@ -94,7 +94,7 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
         },
         'https://giscus.app'
       );
-    else {
+    else if (!document.querySelector('script[src="https://giscus.app/client.js"]')) {
       const script = document.createElement('script');
       script.src = 'https://giscus.app/client.js';
       script.async = true;
