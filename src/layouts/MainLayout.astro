@@ -22,6 +22,7 @@ interface Props {
   headings: HeadingLink[];
   baseHref: string;
   lang: Languages;
+  showComments?: boolean;
 }
 
 const {
@@ -32,6 +33,7 @@ const {
   headings,
   baseHref,
   lang,
+  showComments = false,
 } = Astro.props as Props;
 
 const menuItems: NavItem[] = [
@@ -211,7 +213,7 @@ const subTitle = strings[lang as Languages]["title"];
         <main class="content-area">
           <slot />
         </main>
-        <div id="giscus-container"></div>
+        {showComments && <div id="giscus-container"></div>}
       </div>
       <OnThisPageComponent client:load headings={headings} lang={lang} />
     </div>
