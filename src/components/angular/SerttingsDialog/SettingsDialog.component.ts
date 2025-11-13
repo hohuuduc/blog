@@ -17,9 +17,11 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
   readonly themeOptions: ThemeOption[] = ['system', 'light', 'dark'];
   readonly languageOptions: Languages[] = languages;
   private readonly themeStorageKey = 'personal-blog-theme';
+  private readonly commentsStorageKey = 'personal-blog-comments';
   @ViewChild('dialogRef') private dialogRef?: ElementRef<HTMLDialogElement>;
   opened = signal(false);
   theme = signal<ThemeOption>('system');
+  showComments = signal(true);
 
   constructor() {
     super();
@@ -33,6 +35,10 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
         this.theme.set(savedTheme);
       }
       this.applyTheme(this.theme());
+
+      const savedComments = window.localStorage.getItem(this.commentsStorageKey);
+      this.showComments.set(savedComments !== 'false');
+      this.applyComments(this.showComments());
     }
 
     effect(() => {
@@ -41,6 +47,14 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
         window.localStorage.setItem(this.themeStorageKey, current);
       }
       this.applyTheme(current);
+    });
+
+    effect(() => {
+        const current = this.showComments();
+        if (typeof window !== 'undefined') {
+            window.localStorage.setItem(this.commentsStorageKey, String(current));
+        }
+        this.applyComments(current);
     });
   }
 
@@ -76,6 +90,19 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
     this.theme.set(option);
   }
 
+  toggleComments(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.showComments.set(target.checked);
+  }
+
+  private applyComments(show: boolean) {
+    if (typeof document === 'undefined') return;
+    const container = document.getElementById('giscus-container');
+    if (container) {
+      container.style.display = show ? '' : 'none';
+    }
+  }
+
   private applyTheme(option: ThemeOption) {
     if (typeof document === 'undefined') return;
     const root = document.documentElement;
@@ -94,7 +121,7 @@ export class SettingsDialogComponent extends BaseComponent implements AfterViewI
         },
         'https://giscus.app'
       );
-    else {
+    else if (!document.querySelector('script[src="https://giscus.app/client.js"]')) {
       const script = document.createElement('script');
       script.src = 'https://giscus.app/client.js';
       script.async = true;

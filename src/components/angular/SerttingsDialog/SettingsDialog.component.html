@@ -30,5 +30,16 @@
                 </label>
             </div>
         </section>
+        <section class="setting-group">
+            <div class="group-heading">
+                <h3>{{getString('comments')}}</h3>
+            </div>
+            <div class="options-grid">
+                <label class="toggle">
+                    <input type="checkbox" [checked]="showComments()" (change)="toggleComments($event)" />
+                    <span>{{getString('comments.show')}}</span>
+                </label>
+            </div>
+        </section>
     </form>
 </dialog>

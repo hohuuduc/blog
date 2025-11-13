@@ -22,6 +22,7 @@ interface Props {
   headings: HeadingLink[];
   baseHref: string;
   lang: Languages;
+  showComments?: boolean;
 }
 
 const {
@@ -32,6 +33,7 @@ const {
   headings,
   baseHref,
   lang,
+  showComments = false,
 } = Astro.props as Props;
 
 const menuItems: NavItem[] = [
@@ -77,6 +79,14 @@ const subTitle = strings[lang as Languages]["title"];
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      const savedComments = localStorage.getItem('personal-blog-comments');
+      if (savedComments === 'false') {
+        const style = document.createElement('style');
+        style.textContent = '#giscus-container { display: none; }';
+        document.head.appendChild(style);
+      }
+    </script>
     <style>
       :root {
         color-scheme: light;
@@ -211,7 +221,7 @@ const subTitle = strings[lang as Languages]["title"];
         <main class="content-area">
           <slot />
         </main>
-        <div id="giscus-container"></div>
+        {showComments && <div id="giscus-container"></div>}
       </div>
       <OnThisPageComponent client:load headings={headings} lang={lang} />
     </div>
