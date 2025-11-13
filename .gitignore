@@ -4,4 +4,3 @@ node_modules
 .astro
 /dist
 /dist-scripts
-*.log
