@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import angular from '@analogjs/astro-angular';
 import { fileURLToPath } from 'node:url';
 import remarkGfm from 'remark-gfm';
+import { remarkReadingTime } from './src/utils/remark-reading-time';
 
 const tsconfig = fileURLToPath(new URL('./tsconfig.app.json', import.meta.url));
 
@@ -14,7 +15,7 @@ export default defineConfig({
     })
   ],
   markdown: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkReadingTime],
   },
   output: 'static',
   build: {
