@@ -1,19 +1,23 @@
 ---
+import MainLayout from "@layouts/MainLayout.astro";
 import { resolveBaseSegment } from "src/utils/navigation";
 const url = `0;url=/${resolveBaseSegment()}/vi/`;
 ---
-<!doctype html>
-<html lang="vi">
+<MainLayout
+  lang="vi"
+  sidebarItems={[]}
+  currentSlug=""
+  headings={[]}
+  baseHref="/"
+  showComments={false}
+>
     <head>
         <meta charset="utf-8" />
         <title>Redirecting…</title>
         <meta http-equiv="refresh" content={url} />
         <link rel="canonical" href="/vi/" />
     </head>
-
-    <body>
-        <p>
-            Nếu bạn không được chuyển hướng tự động, vui lòng truy cập <a href="/vi/">tại đây</a>.
-        </p>
-    </body>
-</html>
+    <p>
+        Nếu bạn không được chuyển hướng tự động, vui lòng truy cập <a href="/vi/">tại đây</a>.
+    </p>
+</MainLayout>
