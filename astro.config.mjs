@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import angular from '@analogjs/astro-angular';
 import { fileURLToPath } from 'node:url';
+import remarkGfm from 'remark-gfm';
 
 const tsconfig = fileURLToPath(new URL('./tsconfig.app.json', import.meta.url));
 
@@ -12,6 +13,9 @@ export default defineConfig({
       }
     })
   ],
+  markdown: {
+    remarkPlugins: [remarkGfm],
+  },
   output: 'static',
   build: {
     assetsPrefix: `/${process.env.URL_PAGE}/`
