@@ -26,7 +26,7 @@ const page = Astro.props;
 
 const entries = await getCollection("blog");
 const { sidebarItems, baseHref } = buildNavigation(entries, lang as Languages);
-const { Content, headings } = await page.render();
+const { Content, headings, remarkPluginFrontmatter } = await page.render();
 console.log(page.data.allowDiscussion);
 ---
 
@@ -55,6 +55,7 @@ console.log(page.data.allowDiscussion);
           }).format(page.data.date)
       }
     </p>
+    <p class="reading-time">{remarkPluginFrontmatter.minutesRead}</p>
     <Content />
   </article>
 </MainLayout>
