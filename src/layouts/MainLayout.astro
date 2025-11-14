@@ -63,7 +63,6 @@ const menuItems: NavItem[] = [
 ];
 
 const subTitle = strings[lang as Languages]["title"];
-console.log(showComments)
 ---
 
 <!doctype html>
@@ -81,10 +80,10 @@ console.log(showComments)
       rel="stylesheet"
     />
     <script is:inline>
-      const savedComments = localStorage.getItem('personal-blog-comments');
-      if (savedComments === 'false') {
-        const giscus = document.getElementById('giscus-container');
-        giscus.style.display = 'none';
+      const savedComments = localStorage.getItem("personal-blog-comments");
+      if (savedComments === "false") {
+        const giscus = document.getElementById("giscus-container");
+        giscus.style.display = "none";
       }
     </script>
     <style>
@@ -159,12 +158,21 @@ console.log(showComments)
       }
       .content-area :global(.publish-date) {
         color: var(--text-strong);
-        margin: 0.5rem 0 1rem;
         font-weight: 600;
-        font-size: 0.9rem;
+        font-size: 1rem;
+        margin: 0.3rem 0;
       }
-      .content-area :global(.publish-date + *) {
-        margin-top: 0;
+      .content-area :global(.reading-time) {
+        color: var(--text-strong);
+        font-size: 0.9rem;
+        margin: 0;
+      }
+      .content-area :global(.info-box) {
+        min-width: 0;
+        margin-bottom: 2rem;
+      }
+      .content-area :global(.info-box + *) {
+        margin-top: 0 !important;
       }
       .content-area :global(h2) {
         margin-top: 2.5rem;
@@ -191,6 +199,39 @@ console.log(showComments)
       }
       .content-area :global(code) {
         font-family: "Space Grotesk", "Fira Code", monospace;
+      }
+      .content-area :global(a) {
+        color: var(--accent-color);
+        text-decoration: none;
+      }
+      .content-area :global(a:hover) {
+        text-decoration: underline;
+      }
+      .content-area :global(hr) {
+        border: none;
+        border-top: 1px solid var(--border-color);
+        margin: 2rem 0;
+      }
+      .content-area :global(blockquote) {
+        border-left: 4px solid var(--accent-color);
+        padding-left: 1rem;
+        font-style: italic;
+        color: var(--text-subtle);
+      }
+      .content-area :global(table) {
+        border-collapse: collapse;
+        border: 1px solid var(--border-color);
+        width: 100%;
+        margin: 1.5rem 0;
+      }
+      .content-area :global(th),
+      .content-area :global(td) {
+        border: 1px solid var(--border-color);
+        padding: 0.75rem;
+        text-align: left;
+      }
+      .content-area :global(th) {
+        background: var(--surface-color);
       }
       @media (max-width: 1200px) {
         .layout-container {
@@ -221,7 +262,7 @@ console.log(showComments)
         <main class="content-area">
           <slot />
         </main>
-        {showComments && <div id="giscus-container"></div>}
+        {showComments && <div id="giscus-container" />}
       </div>
       <OnThisPageComponent client:load headings={headings} lang={lang} />
     </div>

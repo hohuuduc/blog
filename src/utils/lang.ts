@@ -28,7 +28,9 @@ export const strings = {
     'nav.group.llms': 'LLMs',
     'nav.group.deepseek': 'Deepseek',
     'comments': 'Discussion',
-    'comments.show': 'Show/Hide discussion content'
+    'comments.show': 'Show/Hide discussion content',
+    'time.reading_time': 'Reading time',
+    'time.minutes': 'minutes',
     // …
   },
   vi: {
@@ -60,7 +62,9 @@ export const strings = {
     'nav.group.llms': 'LLMs',
     'nav.group.deepseek': 'Deepseek',
     'comments': 'Thảo luận',
-    'comments.show': 'Ẩn/hiện nội dung thảo luận'
+    'comments.show': 'Ẩn/hiện nội dung thảo luận',
+    'time.reading_time': 'Thời gian đọc',
+    'time.minutes': 'phút',
     // …
   },
 } as const;

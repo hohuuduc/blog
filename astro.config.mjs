@@ -15,7 +15,7 @@ export default defineConfig({
     })
   ],
   markdown: {
-    remarkPlugins: [remarkGfm, remarkReadingTime],
+    remarkPlugins: [remarkReadingTime, remarkGfm],
   },
   output: 'static',
   build: {
