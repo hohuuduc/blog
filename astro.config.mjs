@@ -3,6 +3,7 @@ import angular from '@analogjs/astro-angular';
 import { fileURLToPath } from 'node:url';
 import remarkGfm from 'remark-gfm';
 import { remarkReadingTime } from './src/utils/remark-reading-time';
+import { remarkIframe } from './src/utils/remark-iframe';
 
 const tsconfig = fileURLToPath(new URL('./tsconfig.app.json', import.meta.url));
 
@@ -15,7 +16,7 @@ export default defineConfig({
     })
   ],
   markdown: {
-    remarkPlugins: [remarkReadingTime, remarkGfm],
+    remarkPlugins: [remarkReadingTime, remarkGfm, remarkIframe],
   },
   output: 'static',
   build: {
