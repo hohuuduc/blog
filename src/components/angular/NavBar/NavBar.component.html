@@ -1,49 +1,17 @@
 <header class="nav-wrapper" [class.nav-scrolled]="scrolled()">
     <div class="nav-inner">
         <a class="brand" href="/">Duc's Blog</a>
-        <nav class="nav-links">
-            @for (item of getNavItems(); track $index) {
-                <div class="nav-item" [class.has-dropdown]="item.pages.length > 1">
-                    @if (item.href) {
-                    <a class="nav-link" [attr.href]="item.href">{{ item.label}}</a>
-                    }
-                    @else {
-                    <div class="nav-link user-select-none">{{ item.label}}</div>
-                    }
-                    <div class="dropdown" *ngIf="item.pages.length > 1">
-                        <a *ngFor="let page of item.pages" class="dropdown-item" [href]="page.href" [aria-label]="page.title">{{
- page.title }}</a>
-                    </div>
-                </div>
-            }
-        </nav>
         <div class="nav-actions">
             <div class="search" (mousedown)="onSearchPointerDown()">
                 <label class="sr-only" [attr.for]="searchInputId">{{ getString('nav.search.aria') }}</label>
-                <input
-                    #searchInput
-                    [id]="searchInputId"
-                    class="search-input"
-                    type="search"
-                    [placeholder]="getString('nav.search.placeholder')"
-                    (input)="onSearchInput($event)"
-                    (focus)="onSearchFocus()"
-                    (blur)="onSearchBlur()"
-                    (keydown)="onSearchKeydown($event)"
-                    [value]="searchQuery()"
-                    autocomplete="off"
-                    autocorrect="off"
-                    autocapitalize="none"
-                    spellcheck="false"
-                />
+                <input #searchInput [id]="searchInputId" class="search-input" type="search"
+                    [placeholder]="getString('nav.search.placeholder')" (input)="onSearchInput($event)"
+                    (focus)="onSearchFocus()" (blur)="onSearchBlur()" (keydown)="onSearchKeydown($event)"
+                    [value]="searchQuery()" autocomplete="off" autocorrect="off" autocapitalize="none"
+                    spellcheck="false" />
                 @if (searchQuery()) {
-                <button
-                    type="button"
-                    class="clear-search"
-                    (click)="clearSearch()"
-                    [title]="getString('nav.search.clear')"
-                    [attr.aria-label]="getString('nav.search.clear')"
-                >
+                <button type="button" class="clear-search" (click)="clearSearch()"
+                    [title]="getString('nav.search.clear')" [attr.aria-label]="getString('nav.search.clear')">
                     ×
                 </button>
                 }
@@ -72,7 +40,8 @@
             <button class="settings-trigger" type="button" (click)="openSettings()" [title]="getString('settings')">
                 <span class="sr-only">{{getString('settings')}}</span>
                 <svg class="settings-icon" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
-                    <path d="M12 10a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm0-6a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm0 12a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z" />
+                    <path
+                        d="M12 10a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm0-6a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm0 12a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z" />
                 </svg>
             </button>
         </div>

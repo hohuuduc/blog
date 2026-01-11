@@ -3,7 +3,6 @@ import { Component, ElementRef, Input, ViewChild, signal } from '@angular/core';
 import type { OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import lunr from 'lunr';
 import BaseComponent from '../Base.component';
-import type { NavItem } from '../types';
 import type { SearchDocument, SearchIndexPayload } from '@utils/search';
 import type { Languages } from '@utils/lang';
 
@@ -18,7 +17,6 @@ const MAX_RESULTS = 8;
 })
 export class NavBarComponent extends BaseComponent implements OnChanges, OnDestroy {
   @Input() baseHref = '/';
-  @Input() navItems: NavItem[] = [];
 
   @ViewChild('searchInput') private searchInput?: ElementRef<HTMLInputElement>;
 
@@ -73,14 +71,6 @@ export class NavBarComponent extends BaseComponent implements OnChanges, OnDestr
     if (typeof window !== 'undefined') {
       window.removeEventListener('scroll', this.windowScrollHandler);
     }
-  }
-
-  getNavItems() {
-    return this.navItems.map((item) => ({
-      label: this.getString(item.label),
-      href: item.href,
-      pages: item.pages
-    }));
   }
 
   scrolled() {

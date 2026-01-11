@@ -34,12 +34,6 @@ export function remarkIframe() {
 
             const text = fullText.trim();
 
-            // Debug log
-            if (text.includes('::iframe')) {
-                console.log('=== FOUND IFRAME SYNTAX ===');
-                console.log('fullText:', text);
-            }
-
             // Match pattern ::iframe("URL") hoặc ::iframe("URL", attributes)
             // Hỗ trợ cả dấu nháy đơn, nháy kép và smart quotes (do remark-smartypants)
             // Smart quotes: " = \u201c, " = \u201d

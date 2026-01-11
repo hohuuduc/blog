@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import remarkGfm from 'remark-gfm';
 import { remarkReadingTime } from './src/utils/remark-reading-time';
 import { remarkIframe } from './src/utils/remark-iframe';
+import { remarkCollapse } from './src/utils/remark-collapse';
 
 const tsconfig = fileURLToPath(new URL('./tsconfig.app.json', import.meta.url));
 
@@ -16,7 +17,7 @@ export default defineConfig({
     })
   ],
   markdown: {
-    remarkPlugins: [remarkReadingTime, remarkGfm, remarkIframe],
+    remarkPlugins: [remarkReadingTime, remarkGfm, remarkIframe, remarkCollapse],
   },
   output: 'static',
   build: {
