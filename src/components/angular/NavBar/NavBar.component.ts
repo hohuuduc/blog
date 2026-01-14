@@ -77,6 +77,11 @@ export class NavBarComponent extends BaseComponent implements OnChanges, OnDestr
     return this.scrolledState();
   }
 
+  get homeUrl(): string {
+    const base = (this.baseHref || '/').replace(/\/+$/, '');
+    return `${base}/${this.lang}/`;
+  }
+
   openSettings(): void {
     document.dispatchEvent(new CustomEvent('open-settings-dialog'));
   }
