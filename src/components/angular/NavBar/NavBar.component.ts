@@ -5,6 +5,7 @@ import lunr from 'lunr';
 import BaseComponent from '../Base.component';
 import type { SearchDocument, SearchIndexPayload } from '@utils/search';
 import type { Languages } from '@utils/lang';
+import { resolveBaseSegment } from '@utils/navigation';
 
 const MAX_RESULTS = 8;
 
@@ -75,6 +76,11 @@ export class NavBarComponent extends BaseComponent implements OnChanges, OnDestr
 
   scrolled() {
     return this.scrolledState();
+  }
+
+  get homeUrl(): string {
+    const segment = resolveBaseSegment();
+    return `/${segment ? segment + '/' : ''}${this.lang}/`;
   }
 
   openSettings(): void {

@@ -1,6 +1,6 @@
 <header class="nav-wrapper" [class.nav-scrolled]="scrolled()">
     <div class="nav-inner">
-        <a class="brand" href="/">Duc's Blog</a>
+        <a class="brand" [href]="homeUrl">Duc's Blog</a>
         <div class="nav-actions">
             <div class="search" (mousedown)="onSearchPointerDown()">
                 <label class="sr-only" [attr.for]="searchInputId">{{ getString('nav.search.aria') }}</label>
